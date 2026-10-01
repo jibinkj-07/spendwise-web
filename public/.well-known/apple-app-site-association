@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "A1B2C3D4E5.com.codedude.spendWise"
+        ],
+        "components": [
+          {
+            "/": "/invite/*"
+          },
+        ]
+      }
+    ]
+  }
+}

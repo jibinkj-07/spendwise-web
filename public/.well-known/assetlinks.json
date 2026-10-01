@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.codedude.spend_wise",
+      "sha256_cert_fingerprints": [
+        "85:9B:71:5C:16:68:AC:F9:58:6C:9D:60:7B:12:F4:08:D8:91:E1:EA:43:E4:BF:2B:C9:28:B8:7B:AB:0D:20:F4"
+      ]
+    }
+  }
+]
