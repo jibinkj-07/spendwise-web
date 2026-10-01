@@ -4,7 +4,13 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import {AppUtil} from "@/lib/app_util";
 
-const googleSans = Google_Sans({subsets:['latin'],variable:'--font-sans'});
+const googleSans = Google_Sans({
+    subsets: ["latin"],
+    variable: "--font-sans",
+    display: "swap",
+    adjustFontFallback: false,
+    fallback: ["system-ui", "Arial", "sans-serif"],
+});
 
 
 export const metadata: Metadata = {
