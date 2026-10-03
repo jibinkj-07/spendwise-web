@@ -3,7 +3,6 @@ import {Google_Sans} from "next/font/google";
 import "./globals.css";
 import {cn} from "@/lib/utils";
 import {AppUtil} from "@/lib/app_util";
-import OpenInAppBanner from "@/components/root/open-app-banner-client";
 
 const googleSans = Google_Sans({
     subsets: ["latin"],
@@ -45,14 +44,14 @@ export default function RootLayout({children}: LayoutProps<"/">) {
     return (
         <html
             lang="en"
-            className={cn("h-full", "antialiased", googleSans.variable)}
+            className={cn("h-full", "antialiased","scroll-smooth", googleSans.variable)}
         >
         <body className="min-h-full flex flex-col">
-        <OpenInAppBanner
-            openUrl="https://spendwise-tracker-hub.vercel.app/open"
-            androidStoreUrl="https://play.google.com/store/apps/details?id=com.codedude.spend_wise"
-            iosStoreUrl="https://apps.apple.com/app/id1234"
-        />
+        {/*<OpenInAppBanner*/}
+        {/*    openUrl="https://spendwise-tracker-hub.vercel.app/open"*/}
+        {/*    androidStoreUrl="https://play.google.com/store/apps/details?id=com.codedude.spend_wise"*/}
+        {/*    iosStoreUrl="https://apps.apple.com/app/id1234"*/}
+        {/*/>*/}
         {children}
         </body>
         </html>
