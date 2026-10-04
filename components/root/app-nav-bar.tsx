@@ -34,9 +34,10 @@ export default function AppNavBar() {
               Features
             </Button>
           </Link>
-          <Button variant={"ghost"} className={"hidden md:flex"}>
-            How it Works
-          </Button>
+            <Link href="#works"><Button variant={"ghost"} className={"hidden md:flex"}>
+                How it Works
+            </Button></Link>
+
           <Button variant={"ghost"}>Get the App</Button>
         </div>
       </div>
