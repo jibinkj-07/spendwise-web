@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 
 const steps = [
   {
@@ -31,11 +31,28 @@ export default function HowItWorks() {
         </p>
       </div>
 
-      <Tile />
+      {steps.map((step, index) => (
+        <Tile
+          key={index}
+          step={index + 1}
+          title={step.title}
+          description={step.description}
+        />
+      ))}
     </section>
   );
 }
 
-function Tile() {
-  return <div className={"p-4 bg-muted"}></div>;
+type TileProps = {
+  title: string;
+  description: string;
+  step: number;
+};
+function Tile({ title, description, step }: TileProps) {
+  return (
+    <div className={"p-4 bg-muted"}>
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+  );
 }
