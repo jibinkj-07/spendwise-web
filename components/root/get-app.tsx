@@ -1,12 +1,14 @@
 import { AppUtil } from "@/lib/app_util";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Play, ShoppingBag } from "lucide-react";
-import useOpenApp from "@/lib/use-open-app";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function GetApp() {
+  const iosAvailable = AppUtil.appleStoreUrl !== "";
+
   return (
-    <section id={"get-app"} className={"px-4 text-white"}>
+    <section id={"get-app"} className={"px-4 text-white scroll-mt-24"}>
       <div
         className={
           "flex flex-col md:flex-row gap-8 justify-between items-center bg-green-800 p-12 rounded-4xl"
@@ -21,29 +23,44 @@ export default function GetApp() {
           </p>
         </div>
 
-        <div className={"flex items-center gap-4"}>
-          <Link href={AppUtil.appleStoreUrl}>
-            <Button
-              disabled={true}
-              className={"bg-white text-black hover:bg-gray-200"}
-              size={"lg"}
+        <div className={"flex flex-wrap items-center justify-center gap-4"}>
+          {iosAvailable ? (
+            <Link
+              href={AppUtil.appleStoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "bg-white text-black hover:bg-gray-200",
+              )}
             >
               <ShoppingBag />
               App Store
-            </Button>
-          </Link>
-
-          <Link href={AppUtil.androidPlayUrl}>
-            <Button
-              variant={"outline"}
-              size={"lg"}
-              className={
-                "bg-green-800 border-white text-white hover:bg-white/20 hover:text-white"
-              }
+            </Link>
+          ) : (
+            <span
+              aria-disabled="true"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "bg-white text-black opacity-60 pointer-events-none",
+              )}
             >
-              <Play />
-              Google Play
-            </Button>
+              <ShoppingBag />
+              App Store · Coming soon
+            </span>
+          )}
+
+          <Link
+            href={AppUtil.androidPlayUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "bg-green-800 border-white text-white hover:bg-white/20 hover:text-white",
+            )}
+          >
+            <Play />
+            Google Play
           </Link>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import Link from "next/link";
+import AppPreview from "@/components/root/app-preview";
 
 export default function HeroSection() {
   return (
@@ -17,13 +18,7 @@ export default function HeroSection() {
         )}
       >
         <Heading />
-        <div
-          className={
-            "w-full h-100 bg-primary/20 rounded-2xl flex items-center justify-center"
-          }
-        >
-          IMAGE
-        </div>
+        <AppPreview />
       </div>
     </section>
   );
@@ -32,14 +27,7 @@ export default function HeroSection() {
 function Heading() {
   return (
     <div className={"flex flex-col text-center md:text-left gap-2"}>
-      <h1
-        aria-hidden="true"
-        className="font-extrabold leading-none tracking-wide text-5xl"
-        // style={{
-        //     fontSize: "clamp(38px, 100vw, 58px)",
-        //     animation: "fadeUp 0.7s 0.1s ease both",
-        // }}
-      >
+      <h1 className="font-extrabold leading-none tracking-wide text-5xl">
         Track spending together,
         <br />
         <span className={"text-primary"}>stay in control</span>
@@ -57,17 +45,19 @@ function Heading() {
           "mt-4 flex flex-row gap-2 items-center justify-center md:justify-start"
         }
       >
-        <Link href="#get-app">
-          <Button size={"lg"}>
-            <Download />
-            Download the App
-          </Button>
+        <Link href="#get-app" className={buttonVariants({ size: "lg" })}>
+          <Download />
+          Download the App
         </Link>
 
-        <Link href="#works">
-          <Button size={"lg"} variant={"secondary"} className={"bg-primary/20"}>
-            See how it works
-          </Button>
+        <Link
+          href="#works"
+          className={cn(
+            buttonVariants({ size: "lg", variant: "secondary" }),
+            "bg-primary/20",
+          )}
+        >
+          See how it works
         </Link>
       </div>
     </div>
