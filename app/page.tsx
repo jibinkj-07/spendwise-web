@@ -9,7 +9,7 @@ export default function Home() {
         <div className={"min-h-dvh relative overflow-x-hidden max-w-7xl mx-auto"}>
             <AppNavBar/>
 
-            <main className={"flex flex-col gap-24"}>
+            <main className={"flex flex-col gap-24 pb-32"}>
                 <HeroSection/>
                 <Features/>
                 <HowItWorks/>
