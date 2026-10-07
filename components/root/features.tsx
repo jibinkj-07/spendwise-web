@@ -22,17 +22,17 @@ export default function Features() {
     <section
       id={"features"}
       className={
-        "px-4 relative min-h-screen flex flex-col justify-center gap-12 overflow-hidden"
+        "px-4 relative flex flex-col justify-center gap-24 overflow-hidden"
       }
     >
-  <div>
-      <h2 className={"text-3xl font-semibold"}>
+      <div>
+        <h2 className={"text-3xl font-semibold"}>
           Everything a shared budget needs
-      </h2>
-      <p className={"text-gray-700"}>
+        </h2>
+        <p className={"text-gray-700"}>
           Simple enough for one person, flexible enough for the whole household.
-      </p>
-  </div>
+        </p>
+      </div>
 
       <div className={"space-y-2"}>
         {/* Feature grid 1*/}

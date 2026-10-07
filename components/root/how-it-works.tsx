@@ -1,4 +1,5 @@
-import React, { JSX } from "react";
+import React from "react";
+import {cn} from "@/lib/utils";
 
 const steps = [
   {
@@ -19,7 +20,7 @@ export default function HowItWorks() {
     <section
       id={"works"}
       className={
-        "px-4 relative min-h-screen flex flex-col justify-center overflow-hidden"
+        "px-4 relative flex flex-col justify-center gap-24 overflow-hidden"
       }
     >
       <div>
@@ -31,14 +32,16 @@ export default function HowItWorks() {
         </p>
       </div>
 
-      {steps.map((step, index) => (
-        <Tile
-          key={index}
-          step={index + 1}
-          title={step.title}
-          description={step.description}
-        />
-      ))}
+      <div className={"grid md:grid-cols-3 gap-2"}>
+        {steps.map((step, index) => (
+          <Tile
+            key={index}
+            step={index + 1}
+            title={step.title}
+            description={step.description}
+          />
+        ))}
+      </div>
     </section>
   );
 }
@@ -50,8 +53,14 @@ type TileProps = {
 };
 function Tile({ title, description, step }: TileProps) {
   return (
-    <div className={"p-4 bg-muted"}>
-      <h2>{title}</h2>
+    <div className={cn("p-6 flex flex-col justify-center gap-2 bg-muted",
+       step === 1&& "rounded-t-4xl rounded-b-sm md:rounded-l-4xl md:rounded-r-sm",
+       step === 2&& "rounded-sm",
+       step === 3&& "rounded-b-4xl rounded-t-sm md:rounded-r-4xl md:rounded-l-sm",
+
+        )}>
+        <p className={"text-5xl mb-3 text-muted-foreground"}>{step}</p>
+      <h2 className={"text-2xl font-medium"}>{title}</h2>
       <p>{description}</p>
     </div>
   );
