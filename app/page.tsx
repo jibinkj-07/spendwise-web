@@ -3,6 +3,7 @@ import HeroSection from "@/components/root/hero-section";
 import Features from "@/components/root/features";
 import HowItWorks from "@/components/root/how-it-works";
 import GetApp from "@/components/root/get-app";
+import Footer from "@/components/root/footer";
 
 export default function Home() {
     return (
@@ -15,6 +16,8 @@ export default function Home() {
                 <HowItWorks/>
                 <GetApp/>
             </main>
+
+           <Footer/>
         </div>
     );
 }
