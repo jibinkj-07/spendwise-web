@@ -35,7 +35,7 @@ export default function Footer() {
 
         <div className={"h-px w-full bg-muted-foreground/20 rounded-full"}/>
 
-        <div className={"text-sm flex items-center justify-between"}>
+        <div className={"text-sm flex flex-col md:flex-row items-center justify-between"}>
          <p>{new Date().getFullYear()}  {AppUtil.appName}. All rights reserved.</p>
 
             <p>Your data is protected under our <Link href={''} className={"text-primary"}>Privacy Policy</Link></p>
