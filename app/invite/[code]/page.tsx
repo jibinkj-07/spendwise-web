@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Link2, Play, ShoppingBag, Smartphone, UsersRound } from "lucide-react";
 import { AppUtil } from "@/lib/app_util";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import PageShell from "@/components/legal/page-shell";
 import PageHeader from "@/components/legal/page-header";
+import useOpenApp from "@/lib/use-open-app";
+import LinkButton from "@/components/invite/link-button";
 
 export const metadata: Metadata = {
   title: "You're invited",
@@ -29,15 +31,12 @@ export default async function InvitePage({
           <>
             You’ve been invited to
             <br />
-            <span className="text-primary">share a workspace</span>
+            <span className="text-primary">join a workspace</span>
           </>
         }
         description={`Open this link on your phone with ${AppUtil.appName} installed and you’ll join automatically with the role you were given.`}
       >
-        <div className="flex items-center gap-2 rounded-lg bg-black/10 p-3 font-mono text-sm max-w-full">
-          <Link2 className="size-4 shrink-0" aria-hidden="true" />
-          <span className="truncate">invite/{shownCode}</span>
-        </div>
+        <LinkButton code={shownCode} />
       </PageHeader>
 
       <section className="px-4">
@@ -46,7 +45,7 @@ export default async function InvitePage({
             <Smartphone className="size-6" aria-hidden="true" />
             <h2 className="text-2xl font-medium">Already have the app?</h2>
             <p className="text-gray-700 leading-7">
-              Tap the invite link again from your phone. It should open{" "}
+                Tap the <span className={"font-medium"}>Open in {AppUtil.appName}</span> button again from your phone. It should open{" "}
               {AppUtil.appName} straight to this workspace.
             </p>
           </div>

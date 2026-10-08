@@ -1,5 +1,3 @@
-import { useCallback } from "react";
-
 type useOpenAppProps = {
   appleStoreUrl: string;
   androidPlayUrl: string;
@@ -11,91 +9,52 @@ export default function useOpenApp({
   appleStoreUrl,
   appUrl,
 }: useOpenAppProps) {
-  function isIOS(): boolean {
-    if (typeof navigator === "undefined") return false;
+  const openSpendWise = () => {
+    const isIOS =
+      /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-    const userAgent = navigator.userAgent;
+    const isAndroid = /Android/i.test(navigator.userAgent);
 
-    return (
-      /iPhone|iPad|iPod/i.test(userAgent) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
-    );
-  }
+    const storeUrl = isIOS
+      ? appleStoreUrl
+      : isAndroid
+        ? androidPlayUrl
+        : undefined;
 
-  function isAndroid(): boolean {
-    if (typeof navigator === "undefined") return false;
+    if (!storeUrl) {
+      // Desktop — don't send them to a mobile store.
+      window.location.href = appUrl;
+      return;
+    }
 
-    return /Android/i.test(navigator.userAgent);
-  }
-
-  const getStoreUrl = useCallback(
-    (androidStoreUrl: string, iosStoreUrl: string): string | undefined => {
-      {
-        if (isAndroid()) return androidStoreUrl;
-        if (isIOS()) return iosStoreUrl;
-
-        return undefined;
-      }
-    },
-    [],
-  );
-
-  const openApp = useCallback(() => {
-    const storeUrl = getStoreUrl(androidPlayUrl, appleStoreUrl);
-
-    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
-    let cleanedUp = false;
-
-    const cleanup = () => {
-      if (cleanedUp) return;
-
-      cleanedUp = true;
-
-      if (fallbackTimer) {
-        clearTimeout(fallbackTimer);
-        fallbackTimer = undefined;
-      }
-
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-
-      window.removeEventListener("blur", handleBlur);
-      window.removeEventListener("pagehide", handlePageHide);
-    };
+    let appOpened = false;
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
+        appOpened = true;
         cleanup();
       }
     };
 
-    const handleBlur = () => {
-      cleanup();
-    };
+    const cleanup = () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
 
-    const handlePageHide = () => {
-      cleanup();
+      clearTimeout(fallbackTimer);
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    window.addEventListener("blur", handleBlur);
-    window.addEventListener("pagehide", handlePageHide);
+    const fallbackTimer = window.setTimeout(() => {
+      cleanup();
 
-    if (storeUrl) {
-      fallbackTimer = setTimeout(() => {
-        if (document.hidden) {
-          cleanup();
-          return;
-        }
+      if (!appOpened) {
+        window.location.href = storeUrl;
+      }
+    }, 1800);
 
-        cleanup();
+    window.location.href = appUrl;
+  };
 
-        window.location.assign(storeUrl);
-      }, 1800);
-    }
-
-    window.location.assign(appUrl);
-  }, [androidPlayUrl, appUrl, appleStoreUrl, getStoreUrl]);
-
-  return { openApp };
+  return { openSpendWise };
 }
